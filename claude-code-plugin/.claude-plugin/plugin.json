@@ -1,0 +1,12 @@
+{
+  "name": "intellij-bridge",
+  "version": "0.1.0",
+  "description": "Claude Code plugin that connects to IntelliJ Bridge through the ijbridge-lsp stdio server.",
+  "author": {
+    "name": "IntelliJ Bridge"
+  },
+  "homepage": "https://github.com/dayssky/intellibridge",
+  "license": "MIT",
+  "keywords": ["intellij", "jetbrains", "lsp", "claude-code"],
+  "lspServers": "./.lsp.json"
+}

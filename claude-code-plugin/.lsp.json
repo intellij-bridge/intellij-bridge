@@ -1,0 +1,29 @@
+{
+  "intellij-bridge": {
+    "command": "./bin/ijbridge-lsp",
+    "transport": "stdio",
+    "extensionToLanguage": {
+      ".java": "java",
+      ".kt": "kotlin",
+      ".kts": "kotlin",
+      ".py": "python",
+      ".js": "javascript",
+      ".jsx": "javascriptreact",
+      ".ts": "typescript",
+      ".tsx": "typescriptreact",
+      ".json": "json",
+      ".md": "markdown",
+      ".xml": "xml",
+      ".gradle": "groovy",
+      ".properties": "properties",
+      ".yaml": "yaml",
+      ".yml": "yaml",
+      ".go": "go",
+      ".rs": "rust",
+      ".css": "css",
+      ".html": "html",
+      ".sql": "sql",
+      ".sh": "shellscript"
+    }
+  }
+}

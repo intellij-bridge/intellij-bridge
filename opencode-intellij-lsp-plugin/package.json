@@ -1,0 +1,25 @@
+{
+  "name": "opencode-intellij-lsp-plugin",
+  "version": "0.1.0",
+  "description": "Installable OpenCode plugin exposing IntelliJ-backed bridge tools via ijbridge",
+  "type": "module",
+  "main": "./index.js",
+  "exports": {
+    ".": "./index.js"
+  },
+  "files": [
+    "index.js",
+    "README.md"
+  ],
+  "keywords": [
+    "opencode",
+    "plugin",
+    "intellij",
+    "lsp",
+    "java"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "@opencode-ai/plugin": "^1.0.0"
+  }
+}

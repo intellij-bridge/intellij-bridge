@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: macos-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Check release metadata
+        run: python3 scripts/check_release_metadata.py
+
+      - name: Install bridge package
+        run: python3 -m pip install ./bridge
+
+      - name: Run bridge tests
+        run: python3 -m unittest discover -s bridge/tests -v
+
+      - name: Compile bridge package
+        run: python3 -m compileall bridge/ijbridge
+
+      - name: Validate OpenCode plugin entrypoint syntax
+        run: node --check opencode-intellij-lsp-plugin/index.js
+
+      - name: Compile IntelliJ plugin
+        working-directory: intellij-plugin
+        run: ./gradlew --no-daemon compileKotlin

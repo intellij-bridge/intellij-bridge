@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ijbridge"
+version = "0.1.0"
+description = "Headless IntelliJ bridge with stdio LSP support"
+readme = "../README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "IntelliJ Bridge" }]
+keywords = ["intellij", "lsp", "jetbrains", "automation"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Operating System :: MacOS",
+  "Topic :: Software Development :: Libraries",
+  "Topic :: Text Editors :: Integrated Development Environments (IDE)",
+]
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/dayssky/intellibridge"
+Repository = "https://github.com/dayssky/intellibridge"
+Issues = "https://github.com/dayssky/intellibridge/issues"
+
+[project.scripts]
+ijbridge = "ijbridge.cli:main"
+ijbridge-lsp = "ijbridge.lsp.server:main"
+
+[tool.setuptools.packages.find]
+where = ["."]

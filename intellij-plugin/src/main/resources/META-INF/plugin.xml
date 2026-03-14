@@ -1,0 +1,22 @@
+<idea-plugin>
+  <id>dev.opencode.intellij-bridge</id>
+  <name>IntelliJ Bridge</name>
+  <vendor>IntelliBridge</vendor>
+
+  <description>
+    Localhost RPC bridge for headless IntelliJ automation and LSP integration.
+  </description>
+
+  <depends>com.intellij.modules.platform</depends>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <applicationService serviceImplementation="dev.opencode.intellibridge.unsafe.UnsafeSettingsService"/>
+    <applicationConfigurable
+      id="dev.opencode.intellij-bridge.settings"
+      displayName="IntelliJ Bridge"
+      parentId="tools"
+      instance="dev.opencode.intellibridge.unsafe.UnsafeSettingsConfigurable"
+    />
+    <postStartupActivity implementation="dev.opencode.intellibridge.core.BridgeStartupActivity"/>
+  </extensions>
+</idea-plugin>

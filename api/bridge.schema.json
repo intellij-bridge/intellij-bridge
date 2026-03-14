@@ -1,0 +1,207 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://intellibridge.dev/schemas/bridge/v0.1/bridge.schema.json",
+  "title": "IntelliJ Bridge RPC",
+  "description": "JSON-RPC contract for external clients, the Python bridge runtime, and the IntelliJ plugin.",
+  "type": "object",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/request"
+    },
+    {
+      "$ref": "#/$defs/successResponse"
+    },
+    {
+      "$ref": "#/$defs/errorResponse"
+    }
+  ],
+  "$defs": {
+    "requestId": {
+      "oneOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "integer",
+          "minimum": 0
+        }
+      ]
+    },
+    "editorContext": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "caretOffset": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "selectionStart": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "selectionEnd": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "request": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "jsonrpc",
+        "id",
+        "apiVersion",
+        "method"
+      ],
+      "properties": {
+        "jsonrpc": {
+          "const": "2.0"
+        },
+        "id": {
+          "$ref": "#/$defs/requestId"
+        },
+        "apiVersion": {
+          "type": "string",
+          "const": "0.1"
+        },
+        "method": {
+          "type": "string",
+          "enum": [
+            "health",
+            "getIdeInfo",
+            "listOpenProjects",
+            "openProject",
+            "closeProject",
+            "openFile",
+            "getDocumentText",
+            "syncDocument",
+            "closeDocument",
+            "applyTextEdits",
+            "getCaretState",
+            "setCaretState",
+            "listActions",
+            "performAction",
+            "findInProject",
+            "findUsages",
+            "gotoSymbol",
+            "getDefinitions",
+            "findReferences",
+            "resolveSymbolAt",
+            "prepareRename",
+            "renameSymbol",
+            "getDiagnostics",
+            "getCompletions",
+            "getHover",
+            "getSignatureHelp",
+            "getCodeActions",
+            "applyCodeAction",
+            "listRunConfigurations",
+            "runConfiguration",
+            "runTests",
+            "getFileProblems",
+            "formatFile",
+            "formatRange",
+            "optimizeImports",
+            "reformat",
+            "unsafe.getStatus",
+            "unsafe.invoke"
+          ]
+        },
+        "projectKey": {
+          "type": "string",
+          "minLength": 1
+        },
+        "editorContext": {
+          "$ref": "#/$defs/editorContext"
+        },
+        "capabilityTokens": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "params": {
+          "type": "object"
+        }
+      }
+    },
+    "error": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer"
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1
+        },
+        "data": {
+          "type": "object"
+        }
+      }
+    },
+    "successResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "jsonrpc",
+        "id",
+        "apiVersion",
+        "result"
+      ],
+      "properties": {
+        "jsonrpc": {
+          "const": "2.0"
+        },
+        "id": {
+          "$ref": "#/$defs/requestId"
+        },
+        "apiVersion": {
+          "type": "string",
+          "const": "0.1"
+        },
+        "result": {
+          "type": "object"
+        }
+      }
+    },
+    "errorResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "jsonrpc",
+        "id",
+        "apiVersion",
+        "error"
+      ],
+      "properties": {
+        "jsonrpc": {
+          "const": "2.0"
+        },
+        "id": {
+          "$ref": "#/$defs/requestId"
+        },
+        "apiVersion": {
+          "type": "string",
+          "const": "0.1"
+        },
+        "error": {
+          "$ref": "#/$defs/error"
+        }
+      }
+    }
+  }
+}
